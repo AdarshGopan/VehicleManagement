@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+{%block body_block%}
+<div style="background-color: darkcyan;">
+    <div class="container">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                <form action="" method="post">
+                    {%csrf_token%}
+                    {{form.as_p}}
+                    <input class="mb-5 btn" style="background-color: goldenrod;margin-left: 34%;" type="submit" value="UPDATE">
+                </form>
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div >
+{%endblock%}

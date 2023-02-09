@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%block body_block%}
+<div style="background-color: darkcyan;" >
+  <div class="row">
+    <div class="col-4"></div>
+    {%if request.user.role == 1%}
+    <div class="col-4"><h1 class="ms-3">VEHICLE DETAILS</h1><a class="mt-3 ms-5 btn btn-sm btn-dark" href="{%url 'addvehicle'%}">ADD VEHICLES DETAILS HERE</a></div>
+    {%endif%}
+    <div class="col-4"></div>
+  </div>
+  <div class="container">
+    <div class="row">
+        {%for vehicle in Vehicles%}
+        <div class="card shadow p-3 mb-5 mt-5 bg-body rounded" style="margin-left: 3%;width: 18rem;height:280px;">
+            <!-- <img src="..." class="card-img-top" alt="..."> -->
+            <div class="card-body">
+              <h5 class="card-title">{{vehicle.v_number}}</h5>
+              <p class="card-text">{{vehicle.v_description}}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">vehicle type : {{vehicle.v_type}}</li>
+              <li class="list-group-item">vehicle model : {{vehicle.v_model}}</li>
+            </ul>
+            {%if request.user.role == 1 or request.user.role == 2 %}
+            <div class="col-4"><a class="mt-3 ms-2 btn btn-sm btn-warning" href="{%url 'update' vehicle.id%}">EDIT</a></div>
+            {%endif%}
+            {%if request.user.role == 1 %}
+            <div class="col-4"><a style="margin-left: 160px;margin-top: -60px;" class="btn btn-sm btn-danger" href="{%url 'delete' vehicle.id%}" >DELETE</a></div>
+            {%endif%}
+          </div>
+        {%endfor%}
+    </div>
+  </div>
+</div>
+{%endblock%}
